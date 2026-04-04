@@ -1,4 +1,4 @@
-package handlers
+package native
 
 import (
 	"agent/cmd/internal/models"
@@ -6,21 +6,24 @@ import (
 	"net/http"
 )
 
-func (h Handlers) registerUserEndpoints() {
+func (h *Handlers) registerUserEndpoints() {
 	http.HandleFunc("GET /users", h.getAllUsers)
 	http.HandleFunc("POST /users", h.addUser)
 	http.HandleFunc("PUT /users/{id}", h.updateUser)
 	http.HandleFunc("DELETE /users/{id}", h.deleteUser)
 }
 
-func (h Handlers) getAllUsers(w http.ResponseWriter, r *http.Request) {
+func (h *Handlers) getAllUsers(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+
 	users := h.usecases.GetAllUsers()
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(users)
 }
 
-func (h Handlers) addUser(w http.ResponseWriter, r *http.Request) {
+func (h *Handlers) addUser(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 
 	var req models.UserRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -41,7 +44,8 @@ func (h Handlers) addUser(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (h Handlers) updateUser(w http.ResponseWriter, r *http.Request) {
+func (h *Handlers) updateUser(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 
 	var req models.UserRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -69,7 +73,8 @@ func (h Handlers) updateUser(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (h Handlers) deleteUser(w http.ResponseWriter, r *http.Request) {
+func (h *Handlers) deleteUser(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 
 	id := r.PathValue("id")
 	if id == "" || id == "/" {
@@ -78,7 +83,7 @@ func (h Handlers) deleteUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user, err := h.usecases.DeleteUser(id)
+	_, err := h.usecases.DeleteUser(id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(models.ErrorResponse{Reason: err.Error()})
@@ -86,6 +91,4 @@ func (h Handlers) deleteUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusNoContent)
-	json.NewEncoder(w).Encode(user)
-
 }

@@ -1,4 +1,4 @@
-package handlers
+package native
 
 import (
 	"agent/cmd/internal/usecases"
@@ -17,7 +17,7 @@ func New(usecases *usecases.UseCases) *Handlers {
 	}
 }
 
-func (h Handlers) Listen(port int) error {
+func (h *Handlers) Listen(port int) error {
 	h.registerUserEndpoints()
 
 	slog.Info("Listening on", "port", port)
