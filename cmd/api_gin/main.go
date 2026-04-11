@@ -15,7 +15,6 @@ func main() {
 	// 3. Injeta regra de negócio no framework Gin
 	apiHandlers := ginhandlers.New(useCases)
 
-	// Usa porta 8081 para não dar conflito com o nativo se rodarem juntos
 	if err := apiHandlers.Listen(8081); err != nil {
 		slog.Error("Falha fatal ao iniciar servidor Gin", "erro", err)
 		os.Exit(1)

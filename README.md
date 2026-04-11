@@ -10,6 +10,12 @@ A linguagem Go nasceu de uma dor de engenharia em escala industrial. Criada inte
 2. **Complexidade Humana:** O excesso de abstrações no Java e C++ dificultava a leitura e a manutenção de bases de código gigantescas por milhares de engenheiros diferentes.
 3. **A Crise da Concorrência:** Os processadores atingiram o limite físico de velocidade (clock) e começaram a escalar em múltiplos núcleos (multicore). As linguagens existentes na época não possuíam estruturas eficientes e seguras para lidar com milhares de tarefas simultâneas nos servidores.
 
+### Pilares da Linguagem
+
+- **Simplicidade:** A sintaxe da linguagem é simples e clara, tornando o código fácil de entender e manter.
+- **Legibilidade:** O código escrito em Go é projetado para ser legível e compreensível, tanto para o desenvolvedor que o escreve quanto para outros membros da equipe.
+- **Produtividade:** Suporte à programação concorrente e paralela de forma eficiente, o que a torna especialmente adequada para o desenvolvimento de servidores web e sistemas que exigem otimização de recursos de hardware. Além disso, a detecção de erros durante a compilação economiza tempo e esforço na depuração, aumentando ainda mais a produtividade dos desenvolvedores.
+
 ### Especificidades e Características
 
 Go foi desenhada como uma linguagem pragmática: possui o desempenho em tempo de execução de linguagens de baixo nível (como C) combinado com a velocidade de escrita de linguagens dinâmicas.
@@ -50,9 +56,29 @@ Go foi desenhada como uma linguagem pragmática: possui o desempenho em tempo de
 
 ---
 
+## 🤖 Aplicações em IA
+
+- Serviços de aprendizado de máquina para resumir ou classificar dados
+- Responder a perguntas com base em um banco de dados
+- Automação de tarefas repetitivas
+
+_Os serviços podem ser acessados ​​pela internet (serviços hospedados) ou executados localmente (serviços baixados)._
+
+**Estruturas/Frameworks gerais:**
+
+- **Genkit Go:** Uma estrutura de código aberto do Google para criar aplicativos com inteligência artificial.
+- **langchaingo:** A implementação em Go do framework LangChain.
+- **Ollama:** Uma biblioteca para executar grandes modelos de linguagem localmente.
+- **CUDA Go (GPU):** Uma biblioteca para executar código CUDA (usado para computação paralela em GPUs) a partir de Go, útil para acelerar tarefas de aprendizado de máquina.
+- **GoCV (GPU):** Uma biblioteca para processamento de imagens e visão computacional, que pode ser usada para tarefas de IA relacionadas a imagens.
+
+_**CGO** é uma ferramenta do Go que permite a interoperabilidade com bibliotecas C, possibilitando chamar funções C diretamente no código Go_
+
+---
+
 ## 🛠️ Visão Geral do Gin
 
-O **Gin** é um framework web HTTP escrito em Go (Golang). Ele implementa uma API semelhante ao extinto framework _Martini_, porém com foco em performance extremada (alega ser até 40x mais rápido), suportada por uma árvore Radix otimizada para o mapeamento de rotas. O Gin não reinventa o protocolo web, mas atua como uma fina camada de conveniência sobre a interface padrão do Go para lidar com JSON, parâmetros em URLs e middlewares.
+O **Gin** é um framework web HTTP escrito em Go. Ele implementa uma API semelhante ao extinto framework _Martini_, porém com foco em performance extremada (alega ser até 40x mais rápido), suportada por uma árvore Radix otimizada para o mapeamento de rotas. O Gin não reinventa o protocolo web, mas atua como uma fina camada de conveniência sobre a interface padrão do Go para lidar com JSON, parâmetros em URLs e middlewares.
 
 ---
 
@@ -97,7 +123,7 @@ O Go embute na biblioteca padrão (`net/http`) um servidor HTTP e HTTP/2 complet
 
 ### Configurações Necessárias
 
-A linguagem abomina configurações pesadas em arquivos `.xml` ou `.json`. Para rodar uma API Gin:
+A linguagem não utiliza configurações pesadas em arquivos `.xml` ou `.json`. Para rodar uma API Gin:
 
 1. Instalação básica do SDK do Go.
 2. Iniciação do módulo na raiz do projeto: `go mod init nome-do-projeto`.
@@ -118,4 +144,4 @@ A adoção do Gin é uma troca transacional: abdica-se do purismo arquitetural d
 
 - **Facilidade e Materiais:** É atualmente um dos frameworks mais adotados no mundo corporativo focado em microserviços. Como consequência, os materiais didáticos e os problemas previamente reportados no StackOverflow são abundantes e facilmente rastreáveis.
 - **Qualidade dos Materiais:** Há um déficit crônico na qualidade educacional encontrada na internet. A esmagadora maioria dos artigos instiga implementações com péssimas práticas, unindo as conexões de banco de dados diretamente dentro do roteador do Gin.
-- **Veredito:** O framework se prova excelente por sua **facilidade de configuração nula** e desempenho estelar. No entanto, em sistemas vitais a longo prazo, exige o emprego ostensivo de padrões como injeção de dependências para não asfixiar as regras de negócio ao seu redor.
+- **Veredito:** O framework se prova excelente por sua **facilidade de configuração nula** e desempenho alto. No entanto, em sistemas vitais a longo prazo, exige o emprego ostensivo de padrões como injeção de dependências para não asfixiar as regras de negócio ao seu redor.
